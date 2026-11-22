@@ -72,7 +72,7 @@
 
   function spawnAgents(){
     agents.forEach(a=>a.node.remove());agents=[];
-    const total=Math.min(24,Math.max(12,Math.round(innerWidth/52)));
+    const total=8;
     for(let i=0;i<total;i++){
       const node=document.createElement('div');
       node.className='cursor';
@@ -102,13 +102,13 @@
     agents.forEach((a,i)=>move(a,innerWidth*(.08+Math.random()*.84),innerHeight*(.08+Math.random()*.84)));
 
     jobs.forEach((job,i)=>{
-      const delay=i*680;
+      const delay=i*1450;
       const timer=setTimeout(()=>{
         if(mySequence!==sequence)return;
         const agent=agents[i%agents.length],r=job.item.r;
         move(agent,r.left+Math.min(22,r.width*.35),r.top+Math.min(22,r.height*.35));
         const f=job.fragment;
-        f.style.transition='opacity 1.1s ease, transform 1.8s cubic-bezier(.18,.72,.25,1)';
+        f.style.transition='opacity 2.2s ease, transform 3.2s cubic-bezier(.18,.72,.25,1)';
         f.style.transform='scale(1)';
         f.style.opacity=job.item.isText?'.93':'.72';
         jobIndex++;
@@ -116,15 +116,15 @@
       timers.push(timer);
     });
 
-    const totalDuration=jobs.length*680+2200;
+    const totalDuration=jobs.length*1450+4200;
     cycleTimer=setTimeout(()=>{
       if(mySequence!==sequence)return;
       // Fade the completed drawing softly, then continuously rebuild the current view.
       stage.querySelectorAll('.fragment').forEach((f,i)=>{
-        f.style.transition='opacity 2.4s ease';
+        f.style.transition='opacity 4.2s ease';
         f.style.opacity='.22';
       });
-      cycleTimer=setTimeout(()=>runCycle(mySequence),2600);
+      cycleTimer=setTimeout(()=>runCycle(mySequence),4600);
     },totalDuration);
   }
 
